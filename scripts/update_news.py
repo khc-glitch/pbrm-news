@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Daily index from Naver News Search API. All links point to original 5 publishers."""
+"""Daily index from NAVER API HUB News Search. Links point to original 5 publishers."""
 import os, re, html, json, time, sys
 from datetime import datetime
 from pathlib import Path
@@ -41,11 +41,11 @@ def main():
  key=os.getenv("NAVER_CLIENT_ID");secret=os.getenv("NAVER_CLIENT_SECRET")
  if not key or not secret:
   print("Naver credentials not configured. Existing site remains.");return
- ses=requests.Session();ses.headers.update({"X-Naver-Client-Id":key,"X-Naver-Client-Secret":secret})
+ ses=requests.Session();ses.headers.update({"X-NCP-APIGW-API-KEY-ID":key,"X-NCP-APIGW-API-KEY":secret})
  found={};successful=0
  for term in QUERIES:
   try:
-   r=ses.get("https://openapi.naver.com/v1/search/news.json",params={"query":term,"display":100,"sort":"date"},timeout=20)
+   r=ses.get("https://naverapihub.apigw.ntruss.com/search/v1/news",params={"query":term,"display":100,"sort":"date"},timeout=20)
    r.raise_for_status();items=r.json().get("items",[]);successful+=1
   except (requests.RequestException,ValueError) as e:
    print("API error",term,str(e),file=sys.stderr);continue
