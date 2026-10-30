@@ -1,5 +1,11 @@
 name: PB-RM 경제·금융 뉴스 자동 발행
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'scripts/**'
+      - '.github/workflows/publish.yml'
   workflow_dispatch:
   schedule:
     - cron: '17 10 * * 1-5'
