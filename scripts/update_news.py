@@ -21,7 +21,7 @@ CATEGORIES=[
  ("산업·경기",["반도체","제조업","수출","투자","바이오","공장","에너지","생산","소비","ai","산업","기업","경제","성장","경기"],"PB RM","업종별 경기 차이와 기업의 투자·운전자금 수요를 확인해 보세요."),
 ]
 def clean(v):
- return re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]*>","",v or ""))).strip()
+ return re.sub(r"\s+"," ",html.unescape(re.sub(r"<[^>]*>","",v or ""))).strip()
 def publisher(url):
  u=urlparse(url)
  if u.scheme!="https" or u.username or u.password:return None
