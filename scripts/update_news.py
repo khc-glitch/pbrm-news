@@ -64,7 +64,7 @@ def clean(s):
 
 def publisher(url):
     u = urlparse(url)
-    if u.scheme != "https" or u.username or u.password:
+    if u.scheme not in ("https", "http") or u.username or u.password:
         return None
     host = (u.hostname or "").lower()
     for name, domain in DOMAINS.items():
